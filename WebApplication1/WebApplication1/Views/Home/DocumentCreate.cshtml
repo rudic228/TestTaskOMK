@@ -1,0 +1,31 @@
+﻿<form method="post">
+    <div class="row">
+        <div class="col-4">Номер документа:</div>
+        <div class="col-8"><input type="text" name="DocumentId" value = "@ViewBag?.Id" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Номер поставки:</div>
+        <div class="col-8"><input type="text" name="DeliveryNumber" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Штрихкод:</div>
+        <div class="col-8"><input type="text" name="Barcode" /></div>
+    </div>
+     <div class="row">
+        <div class="col-4">Примечание:</div>
+        <div class="col-8"><input type="text" name="Note" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Тип документа:</div>
+        <div class="col-8"><select id="DocType" name="DocType" class="form-control" asp-items="@(new SelectList(@ViewBag.DocType,"Item1","Item2"))"></select></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Цех:</div>
+        <div class="col-8"> <select id="WorkShop" name="WorkShop" class="form-control" asp-items="@(new SelectList(@ViewBag.WorkShop,"Item1","Item2"))"></select></div>
+    </div>
+     <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Отправить" class="btn btnprimary" /></div>
+    </div>
+   
+</form>

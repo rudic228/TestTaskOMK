@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Document List";
+}
+@using Database
+@model List<Document>
+@{
+        if (Model == null)
+        {
+        <h3 class="display-4">Авторизируйтесь</h3>
+        return;
+    }
+    <div class="row">
+        @if (Program.UserRole != "Бухгалтер")
+        {
+            <div class="col-2"><a asp-controller="Home" asp-action="DocumentCreate" id ="buttonCreate" class="buttonArchivist"> Создать документ</a></div>
+            <div class="col-2"><button  id="buttonUpdate" class="buttonArchivist"> Изменить документ</button></div>
+            <div class="col-2"><button  id="buttonDelete" class="buttonArchivist"> Удалить документ</button></div>  
+        }
+        @if(Program.UserRole != "Архивист")
+        {
+               <div class="col-2"><button  id="buttonReturn" class="buttonAccountant"> Вернуть на уточнение</button></div>
+            <div class="col-2"><button  id="buttonAccept" class="buttonAccountant"> Принять к учету</button></div>   
+        }
+  
+            <div class="col-2"><select id="selectUpdate" name="selectId" class="form-control"asp-items="@(new SelectList(@Model.Select(x=>x.Id).ToList()))"></select></div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Дата создания
+                    </th>
+                    <th>
+                        Дата изменения
+                    </th>
+                    <th>
+                        Номер поставки
+                    </th>
+                    <th>
+                        Номер документа
+                    </th>
+                    <th>
+                        Дата документа
+                    </th>
+                    <th>
+                        Вид документа
+                    </th>
+                    <th>
+                        Цех
+                    </th>
+                    <th>
+                        Этап
+                    </th>
+                    <th>
+                        Штрихкод
+                    </th>
+                    <th>
+                        Роль изменившего
+                    </th>
+                    <th>
+                        Примечание
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem =>item.DateUpdate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem =>item.DeliveryNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDocument)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Workshop)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Barcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RolePersonChange)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Note)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="text" id="inputFilter"><button id="buttonFilter">Фильтрация по номеру документа</button>
+    }
+

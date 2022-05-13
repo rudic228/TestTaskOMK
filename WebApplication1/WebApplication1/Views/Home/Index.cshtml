@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form method="post">
+        <select id="post" name="post" class="form-control" asp-items="@(new SelectList(@ViewBag.Post,"Item1","Item2"))"></select>
+        <button type = "submit"> Далее </button>
+    </form>
+</div>
